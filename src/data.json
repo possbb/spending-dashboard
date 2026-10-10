@@ -1,0 +1,24 @@
+{
+  "id": "2f127ca3-d25f-4b41-8e8d-b3ba67dc9562",
+  "title": "消费分析",
+  "surface": "dashboard",
+  "buildStatus": "complete",
+  "generatedAt": "2026-10-10T00:00:00Z",
+  "queries": {
+    "transactions": {
+      "rows": [],
+      "source": {
+        "label": "当前浏览器本地导入的账单",
+        "caveats": [
+          "数据仅保存在当前浏览器，不上传到服务器。"
+        ]
+      }
+    }
+  },
+  "ledger": {
+    "generation": "browser",
+    "revision": "empty",
+    "statements": [],
+    "count": 0
+  }
+}

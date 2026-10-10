@@ -1,0 +1,11 @@
+import fs from 'node:fs';
+import * as pdfjs from 'pdfjs-dist/legacy/build/pdf.mjs';
+const src=fs.readFileSync('src/content/dashboard/browser-parser.js','utf8').replace("import descriptions from './merchant-descriptions.json';",'').replaceAll('export ','');
+const {textLines,parseLines}=new Function('descriptions',src+';return {textLines,parseLines};')(JSON.parse(fs.readFileSync('src/content/dashboard/merchant-descriptions.json','utf8')));
+const bytes=new Uint8Array(fs.readFileSync(process.argv[2]));
+const pdf=await pdfjs.getDocument({data:bytes,cMapUrl:process.cwd().replaceAll('\\','/')+'/public/cmaps/',cMapPacked:true,standardFontDataUrl:process.cwd().replaceAll('\\','/')+'/public/standard_fonts/'}).promise;
+const pages=[];for(let i=1;i<=pdf.numPages;i++)pages.push(textLines((await (await pdf.getPage(i)).getTextContent()).items));
+const result=await parseLines(pages,'test.pdf','test');
+const eur=result.rows.filter(r=>r.originalCurrency==='EUR'&&r.kind==='消费').reduce((s,r)=>s+Math.round(r.amount*100),0);
+console.log('PASS: PDF parsed and reconciled');
+await pdf.destroy();

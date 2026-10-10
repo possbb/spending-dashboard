@@ -1,0 +1,10 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const source=fs.readFileSync('src/content/dashboard/browser-parser.js','utf8').replace("import descriptions from './merchant-descriptions.json';",'').replaceAll('export ','');
+const {parseLines}=new Function('descriptions',source+';return {parseLines};')({});
+const lines=['账单周期 2026/01/01 - 2026/01/31','交易日期 入账日期 交易货币 入账货币','卡号：****1234','1234 美元 20.00 = 0.00 - 0.00 + 20.00 - 0.00 + 0.00 + 0.00','2026/01/10 2026/01/11 (消费) TEST SHOP 8.00 欧元 10.00 美元','2026/01/10 2026/01/11 (消费) TEST SHOP 8.00 欧元 10.00 美元'];
+test('reconciles in cents and preserves repeated transactions',async()=>{const s=await parseLines([lines],'synthetic.pdf','hash');assert.equal(s.rows.length,2);assert.equal(s.duplicateRows,2);assert.equal(s.checks[0].gross,20);assert.notEqual(s.rows[0].id,s.rows[1].id);assert.equal(s.rows[0].originalCurrency,'EUR');assert.ok(!JSON.stringify(s).includes('1234'));});
+test('renamed files share content identity',async()=>{assert.equal((await parseLines([lines],'a.pdf','a')).id,(await parseLines([lines],'b.pdf','b')).id);});
+test('rejects mismatched reconciliation',async()=>{await assert.rejects(parseLines([lines.slice(0,-1)],'bad.pdf','x'),/不一致/);});
+test('rejects unsupported and malformed statements',async()=>{await assert.rejects(parseLines([['plain text']],'bad.pdf','x'));await assert.rejects(parseLines([[...lines,'2026/01/12 2026/01/13 broken']],'bad.pdf','x'));});

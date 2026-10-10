@@ -1,0 +1,6 @@
+node_modules/
+dist/
+*.pdf
+ledger.json
+*.png
+.data-app-offline/
