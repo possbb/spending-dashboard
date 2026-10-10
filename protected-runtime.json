@@ -23,11 +23,11 @@
     "docs/components/tables.md": "bad26c41789c621c24e25748111e20c6a100533477ef582c175a1edca12380f3",
     "index.html": "314bb3975bdcd7322067d234f99398b06f609c67c2321554eda742f2338b3c5e",
     "package-lock.json": "b90a89af3b1230bb0727f5fbed2dc978a01dfd782175e9c293866438164400b8",
-    "package.json": "904510b19296087fae701959f6cd33671c96b19c6a312cb74a9c07bfee5084ec",
+    "package.json": "edcc2cbc16f07886dd227501ce15d3a469e8fbd0a12a0fd175780760a535cc86",
     "scripts/authorize-protected-change.mjs": "9b9f012d65c34a1f9ac4d107ba226f82aadabde72980c2d393c63e9d68eff6a3",
     "scripts/protected-file-digest.mjs": "2583e42fafb0d0fab7342b8dca163fe0d6771928dc41c830fbdfdee3af821822",
     "scripts/verify-protected-runtime.mjs": "47d95847a9135cd125581a4b994208adc3822cbef4a2c8bfaf562f0d2ef3a9af",
-    "src/App.jsx": "cca1b057a729b37388a82e64e03086bcf9cd1a25238963be6fdf81b842e02a41",
+    "src/App.jsx": "6a3a5647e8a405497a6d40328661dc6639e719433f11b27aa466348b02e35033",
     "src/DataAppContext.jsx": "309d971e9fd4494b2f704087c81ded8837ec955ae4a57898f54dd776c8fca30f",
     "src/DataAppRuntime.jsx": "3008a08c2a79c90a5ea5cb3f91b7f77113dfca1e8c4578bf47c34bd9932bd088",
     "src/DataAppShell.jsx": "004aa988679e158e668b8dd8c151869e9b6106cd31eeb33de0b51fc51c107259",
@@ -239,6 +239,6 @@
     "src/use-sortable-blocks.js": "5462804b0f62fcfc7fad6a581b1025057f827a368a0c528d218000c7928ba666",
     "src/verification-reminder.js": "9c135c75d15ef1a43aa98efd5db51aed44afbacb86206d073608cdb764957bc0",
     "src/worker.js": "bc859b3fcb14dc269367d5aecbbea5f6d307a477a607b3e376f992a8748b30f7",
-    "vite.config.js": "d132e32eed19da18d7130e285cdf4c922a01d477626693c6d8b3b8f8ecd8ec1c"
+    "vite.config.js": "c8059d1c2d4a672b7d18fd91940aa97672bc99b44f349a854f7c36255ce6d471"
   }
 }
