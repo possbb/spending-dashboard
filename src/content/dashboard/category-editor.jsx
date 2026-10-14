@@ -4,7 +4,7 @@ import React, {createContext, useContext, useEffect, useState} from 'react';
 const baseStorageKey='spending-public:categories:v1';
 const categoryKey=generation=>generation==='initial'?baseStorageKey:baseStorageKey+':'+generation;
 export function clearSavedCategories(generation){try{localStorage.removeItem(categoryKey(generation));}catch{}}
-const labels=['超市与食品','餐饮与咖啡','家居与日用品','公共交通','游戏娱乐','服饰鞋包','医疗健康','教育学习','旅游住宿','通讯与订阅','美团·用途待确认','待确认','其他消费'];
+export const labels=['超市与食品','餐饮与咖啡','家居与日用品','公共交通','游戏娱乐','服饰鞋包','医疗健康','教育学习','旅游住宿','通讯与订阅','美团·用途待确认','待确认','其他消费'];
 const subcategories={
  '超市与食品':['综合超市','亚洲食品店','生鲜食品店','待细分'],
  '餐饮与咖啡':['餐厅','咖啡与甜品','自动售货机','待细分'],
@@ -17,10 +17,11 @@ const subcategories={
  '旅游住宿':['住宿','机票','景点门票','待细分'],
  '通讯与订阅':['电话网络','软件订阅','待细分']
 };
-const subChoices=category=>subcategories[category]||['待细分'];
+export const subChoices=category=>subcategories[category]||['待细分'];
 function inferredSubcategory(row,category){
  const m=row.merchant.toUpperCase();
  if(category!==row.category)return '待细分';
+ if(row.sourceType==='manual' && subChoices(category).includes(row.subcategory))return row.subcategory;
  if(category==='超市与食品')return /TOKYOYA|LEE ASIAN/.test(m)?'亚洲食品店':'综合超市';
  if(category==='餐饮与咖啡')return /ARBITRADE/.test(m)?'自动售货机':/CAFE|COFFEE|GELATO|SANA LOCURA/.test(m)?'咖啡与甜品':'餐厅';
  if(category==='家居与日用品')return /IKEA/.test(m)?'家居卖场':/BAZAR|BASAR/.test(m)?'日用百货店':'待细分';
